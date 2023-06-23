@@ -1,0 +1,6 @@
+[flake8]
+ignore = E501,E722,W291,W503,E203,F401
+select = C,E,F,W,B,B950
+exclude = .git,__pycache__,venv,pipenv,tests
+max-complexity = 10
+per-file-ignores =

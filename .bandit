@@ -1,0 +1,3 @@
+[bandit]
+exclude: test
+skips: ['B303','B501', 'B311']
