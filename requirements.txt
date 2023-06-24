@@ -3,7 +3,8 @@ aiohttp==3.8.4
 alembic==1.11.1
 fastapi==0.98.0
 httpx==0.24.1
-SQLAlchemy==2.0.16
+redis==4.5.5
+SQLAlchemy==2.0.17
 uvicorn==0.22.0
 
 # development
