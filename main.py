@@ -1,14 +1,30 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+from apps import router
+from core.config import settings
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+class App(FastAPI):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
+
+app = App(
+    title=settings.PROJECT_NAME,
+    responses=settings.VALIDATION_ERROR_RESPONSE,
+)
+
+app.include_router(router)
 
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    server = uvicorn.Server(
+        uvicorn.Config(
+            app,
+            host=settings.HOST,
+            port=settings.PORT,
+        )
+    )
+
+    server.run()
