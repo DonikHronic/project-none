@@ -60,5 +60,15 @@ class Model(object):
     created = Column(DateTime, nullable=False, default=datetime.now())
     updated = Column(DateTime, nullable=False, default=datetime.now(), onupdate=datetime.now())
 
+    def __str__(self):
+        return f"{self.__class__.__name__} object with id {self.id}"
+
+    def __repr__(self):
+        return f"{self.__class__.__name__} object with id {self.id}"
+
+    @classmethod
+    def fields(cls):
+        pass
+
 
 BaseModel = declarative_base(cls=Model)

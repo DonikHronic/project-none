@@ -2,6 +2,8 @@ import bcrypt
 from sqlalchemy import Column, String, UUID, ForeignKey, Text
 from sqlalchemy.orm import relationship
 
+from apps.core.models import Status
+from apps.user.models import User
 from core.database import BaseModel
 
 
@@ -12,8 +14,13 @@ class Profile(BaseModel):
     password = Column(String, unique=True, nullable=True)
     first_name = Column(String(150), default="First Name", nullable=False)
     second_name = Column(String(150), default="Second Name", nullable=False)
+
     type_guid = Column(UUID, ForeignKey("profile_types.guid"), nullable=False)
     type = relationship("ProfileType", back_populates="profiles")
+    user_guid = Column(UUID, ForeignKey("users.guid"), nullable=False)
+    user = relationship(User, back_populates="profiles")
+    status_guid = Column(UUID, ForeignKey("statuses.guid"), nullable=False)
+    status = relationship(Status)
 
     @classmethod
     def make_password(cls, password: str):

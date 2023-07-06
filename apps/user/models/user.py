@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, UUID
+from sqlalchemy import Column, String, ForeignKey, UUID
 from sqlalchemy.orm import relationship
 
 from apps.core.models.status import Status
