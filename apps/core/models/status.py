@@ -1,5 +1,8 @@
-from sqlalchemy import Column, Text, String, ForeignKey, UUID
-from sqlalchemy.orm import relationship
+import uuid
+from typing import Optional
+
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship, Mapped, MappedColumn
 
 from core.database import BaseModel
 
@@ -7,16 +10,16 @@ from core.database import BaseModel
 class Status(BaseModel):
     """Statuses"""
 
-    code = Column(String(50), unique=True, nullable=False)
-    type_guid = Column(UUID, ForeignKey("status_types.guid"), nullable=False)
-    type = relationship("StatusType", back_populates="statuses")
-    name = Column(String(150), nullable=False)
-    description = Column(Text)
+    code: Mapped[str] = MappedColumn(unique=True, nullable=False)
+    type_guid: Mapped[uuid.UUID] = MappedColumn(ForeignKey("status_types.guid"), nullable=False)
+    type: Mapped["StatusType"] = relationship(back_populates="statuses")
+    name: Mapped[str] = MappedColumn(nullable=False)
+    description: Mapped[Optional[str]]
 
 
 class StatusType(BaseModel):
     """Status Types"""
 
-    code = Column(String(50), unique=True, nullable=False)
-    name = Column(String(150), nullable=False)
-    description = Column(Text)
+    code: Mapped[str] = MappedColumn(unique=True, nullable=False)
+    name: Mapped[str] = MappedColumn(nullable=False)
+    description: Mapped[Optional[str]]

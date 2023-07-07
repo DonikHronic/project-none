@@ -1,5 +1,7 @@
-from sqlalchemy import Column, String, ForeignKey, UUID
-from sqlalchemy.orm import relationship
+import uuid
+
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship, Mapped, MappedColumn
 
 from apps.core.models.status import Status
 from core.database import BaseModel
@@ -8,7 +10,7 @@ from core.database import BaseModel
 class User(BaseModel):
     """User Model"""
 
-    email = Column(String, unique=True, nullable=False)
-    phone = Column(String, unique=True, nullable=False)
-    status_guid = Column(UUID, ForeignKey("statuses.guid"), nullable=False)
-    status = relationship(Status, back_populates="users")
+    email: Mapped[str] = MappedColumn(unique=True, nullable=False)
+    phone: Mapped[str] = MappedColumn(unique=True, nullable=False)
+    status_guid: Mapped[uuid.UUID] = MappedColumn(ForeignKey("statuses.guid"), nullable=False)
+    status: Mapped[Status] = relationship(back_populates="users")

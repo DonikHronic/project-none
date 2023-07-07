@@ -2,13 +2,14 @@
 aiohttp==3.8.4
 alembic==1.11.1
 bcrypt==4.0.1
-fastapi==0.99.0
+fastapi==0.99.1
 httpx==0.24.1
+Pillow==10.0.0
 psycopg2-binary==2.9.6
 pydantic==1.10.9
 python-dotenv==1.0.0
 redis==4.6.0
-SQLAlchemy==2.0.17
+SQLAlchemy==2.0.18
 uvicorn==0.22.0
 
 # development

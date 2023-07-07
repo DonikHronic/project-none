@@ -4,8 +4,15 @@ from datetime import datetime
 from functools import lru_cache
 from typing import Generator
 
-from sqlalchemy import create_engine, Column, Integer, DateTime, UUID
-from sqlalchemy.orm import sessionmaker, declarative_base, scoped_session, declared_attr
+from sqlalchemy import create_engine
+from sqlalchemy.orm import (
+    declared_attr,
+    declarative_base,
+    Mapped,
+    MappedColumn,
+    scoped_session,
+    sessionmaker,
+)
 
 from core.config import settings
 from core.utils import generate_tablename
@@ -55,10 +62,10 @@ class Model(object):
 
     __table_args__: dict = {}
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    guid = Column(UUID, unique=True, default=uuid.uuid4())
-    created = Column(DateTime, nullable=False, default=datetime.now())
-    updated = Column(DateTime, nullable=False, default=datetime.now(), onupdate=datetime.now())
+    id: Mapped[int] = MappedColumn(primary_key=True, autoincrement=True)
+    guid: Mapped[uuid.UUID] = MappedColumn(unique=True, default=uuid.uuid4())
+    created: Mapped[datetime] = MappedColumn(nullable=False, default=datetime.now())
+    updated: Mapped[datetime] = MappedColumn(nullable=False, default=datetime.now(), onupdate=datetime.now())
 
     def __str__(self):
         return f"{self.__class__.__name__} object with id {self.id}"
