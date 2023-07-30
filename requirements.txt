@@ -9,6 +9,7 @@ psycopg2-binary==2.9.6
 pydantic==1.10.9
 python-dotenv==1.0.0
 redis==4.6.0
+starlette-admin==0.10.0
 SQLAlchemy==2.0.19
 uvicorn==0.23.1
 

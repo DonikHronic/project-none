@@ -23,3 +23,4 @@ class StatusType(BaseModel):
     code: Mapped[str] = MappedColumn(unique=True, nullable=False)
     name: Mapped[str] = MappedColumn(nullable=False)
     description: Mapped[Optional[str]]
+    statuses: Mapped[list[Status]] = relationship(back_populates="type")

@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from apps import router
+from core.admin import admin
 from core.config import settings
 
 
@@ -15,6 +16,12 @@ app = App(
 )
 
 app.include_router(router)
+
+
+@app.on_event("startup")
+async def startup():
+    admin.mount_to(app)
+
 
 if __name__ == "__main__":
     import uvicorn
