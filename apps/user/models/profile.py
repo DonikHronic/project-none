@@ -23,7 +23,7 @@ class Profile(BaseModel):
     user_guid: Mapped[uuid.UUID] = MappedColumn(ForeignKey("users.guid"), nullable=False)
     user: Mapped["User"] = relationship(back_populates="profiles")
     status_guid: Mapped[uuid.UUID] = MappedColumn(ForeignKey("statuses.guid"), nullable=False)
-    status: Mapped[Status] = relationship(back_populates="profiles")
+    status: Mapped[Status] = relationship()
 
     @classmethod
     def make_password(cls, password: str):
@@ -39,3 +39,5 @@ class ProfileType(BaseModel):
     code: Mapped[str] = MappedColumn(nullable=False, unique=True)
     name: Mapped[str] = MappedColumn(nullable=False)
     description: Mapped[Optional[str]]
+
+    profiles: Mapped[list[Profile]] = relationship(back_populates="type")

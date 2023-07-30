@@ -13,4 +13,5 @@ class User(BaseModel):
     email: Mapped[str] = MappedColumn(unique=True, nullable=False)
     phone: Mapped[str] = MappedColumn(unique=True, nullable=False)
     status_guid: Mapped[uuid.UUID] = MappedColumn(ForeignKey("statuses.guid"), nullable=False)
-    status: Mapped[Status] = relationship(back_populates="users")
+    status: Mapped[Status] = relationship()
+    profiles: Mapped[list["Profile"]] = relationship(back_populates="user")  # noqa
